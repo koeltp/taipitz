@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>正在跳转至 tz.taipi.top</title>
+    <!-- 后备自动刷新：如果 JavaScript 不可用，4秒后跳转 -->
+    <meta http-equiv="refresh" content="4;url=https://tz.taipi.top">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecf2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            margin: 0;
+        }
+
+        .card {
+            max-width: 480px;
+            width: 100%;
+            background-color: rgba(255,255,255,0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 32px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15), 0 4px 12px rgba(0,0,0,0.1);
+            padding: 40px 28px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.5);
+            transition: all 0.2s ease;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            background: linear-gradient(145deg, #1e2b3c, #2c3e50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .target-url {
+            background: rgba(10, 40, 80, 0.06);
+            padding: 12px 16px;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #1e3c5a;
+            word-break: break-all;
+            border: 1px solid rgba(0,50,100,0.1);
+            margin: 24px 0 16px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .target-url strong {
+            font-weight: 600;
+            color: #0b2b44;
+        }
+
+        .countdown-area {
+            font-size: 1.5rem;
+            margin: 16px 0 24px;
+            color: #2c3e50;
+            background: rgba(200, 215, 230, 0.3);
+            padding: 14px 20px;
+            border-radius: 80px;
+            display: inline-block;
+            min-width: 160px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+
+        #countdown {
+            font-weight: 700;
+            font-size: 2.1rem;
+            color: #1e4a7a;
+            display: inline-block;
+            min-width: 3rem;
+            text-shadow: 0 2px 6px rgba(0,80,150,0.2);
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .btn {
+            border: none;
+            background: white;
+            padding: 16px 20px;
+            border-radius: 56px;
+            font-size: 1.2rem;
+            font-weight: 550;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 6px 14px rgba(0,20,50,0.1);
+            border: 1px solid rgba(255,255,255,0.7);
+            color: #0b2f4a;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+            background: rgba(255,255,255,0.9);
+        }
+
+        .btn-primary {
+            background: #1e4a7a;
+            color: white;
+            border: 1px solid #3777b0;
+            box-shadow: 0 8px 18px rgba(20,80,150,0.3);
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            background: #256597;
+            transform: scale(1.02);
+            box-shadow: 0 12px 24px rgba(20,100,180,0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.8);
+            color: #1e3a5a;
+            border: 1px solid #aac3db;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            border-color: #5e8ab9;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .manual-hint {
+            margin-top: 24px;
+            font-size: 0.95rem;
+            color: #5a6f84;
+            border-top: 1px dashed rgba(0,0,0,0.1);
+            padding-top: 20px;
+        }
+
+        .manual-hint a {
+            color: #1e4a7a;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #8aacc9;
+        }
+
+        .manual-hint a:hover {
+            color: #0a2f4a;
+            border-bottom: 1px solid #0b2f4a;
+        }
+
+        noscript {
+            display: block;
+            margin-top: 20px;
+            padding: 14px;
+            background: #fde7e7;
+            border-radius: 28px;
+            color: #a13131;
+            font-weight: 500;
+            border: 1px solid #ffb3b3;
+        }
+
+        /* 微光动画 (可选) */
+        .loading-dots {
+            display: inline-block;
+            width: 20px;
+            text-align: left;
+        }
+
+        .loading-dots::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+            width: 20px;
+            display: inline-block;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: ''; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #8c9aa8;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>准备跳转</h1>
+        <div class="target-url">
+            🌐 <strong>https://tz.taipi.top</strong>
+        </div>
+
+        <div class="countdown-area">
+            <span>⏳ 剩余 </span><span id="countdown">3</span><span> 秒</span>
+            <span class="loading-dots"></span>
+        </div>
+
+        <div class="button-group">
+            <button class="btn btn-primary" id="jump-btn">👉 立即前往</button>
+            <a href="https://tz.taipi.top" class="btn btn-secondary" id="direct-link">🔗 手动跳转链接</a>
+        </div>
+
+        <div class="manual-hint">
+            ⚡ 若无反应，请点击上方按钮<br>
+            <span style="font-size:0.9rem; opacity:0.7;">或直接访问 <a href="https://tz.taipi.top" target="_blank">tz.taipi.top</a></span>
+        </div>
+
+        <noscript>
+            <p>🚫 您的浏览器未启用 JavaScript。<br>请点击上方手动链接，或等待几秒后自动跳转。</p>
+        </noscript>
+
+        <footer>⏱️ 自动跳转倒计时 · 安全链接</footer>
+    </div>
+
+    <script>
+        (function() {
+            // 严格模式，确保变量不污染
+            "use strict";
+
+            // 目标 URL
+            const TARGET_URL = "https://tz.taipi.top";
+
+            // 倒计时初始秒数 (必须 <= meta 中的秒数，meta 设为 4 秒后备)
+            const INIT_SECONDS = 3;
+
+            // DOM 元素
+            const countdownSpan = document.getElementById('countdown');
+            const jumpBtn = document.getElementById('jump-btn');
+            const directLink = document.getElementById('direct-link');
+
+            // 状态变量
+            let remainingSeconds = INIT_SECONDS;
+            let intervalId = null;
+            let jumped = false;          // 防止重复跳转
+
+            // 跳转函数 (使用 replace 不产生历史记录)
+            function performJump() {
+                if (jumped) return;
+                jumped = true;
+
+                // 清除计时器
+                if (intervalId) {
+                    clearInterval(intervalId);
+                    intervalId = null;
+                }
+
+                // 执行跳转 (替换当前历史记录)
+                window.location.replace(TARGET_URL);
+                // 备选：如果 replace 被阻止或者异常，尝试直接赋值 (但 replace 是主流)
+                // 但加上超时安全网 (极少数情况)
+                setTimeout(function() {
+                    if (!jumped) { // 如果意外没有跳转，强制跳转
+                        window.location.href = TARGET_URL;
+                    }
+                }, 200);
+            }
+
+            // 更新倒计时显示
+            function updateCountdown() {
+                if (countdownSpan) {
+                    countdownSpan.textContent = remainingSeconds;
+                }
+
+                // 倒计时结束，执行跳转
+                if (remainingSeconds <= 0) {
+                    performJump();
+                }
+            }
+
+            // 开始倒计时 (每秒更新)
+            function startCountdown() {
+                if (intervalId) {
+                    clearInterval(intervalId);
+                }
+                // 立即显示初始值
+                updateCountdown();
+
+                intervalId = setInterval(function() {
+                    // 减少秒数，但确保不低于0
+                    if (remainingSeconds > 0) {
+                        remainingSeconds -= 1;
+                    }
+                    updateCountdown();
+
+                    // 如果已经跳转，清除定时器
+                    if (jumped) {
+                        if (intervalId) {
+                            clearInterval(intervalId);
+                            intervalId = null;
+                        }
+                    }
+                }, 1000); // 每秒执行
+            }
+
+            // 取消倒计时并跳转 (用于按钮点击)
+            function cancelAndJump(event) {
+                // 阻止链接的默认行为 (如果是链接点击)
+                if (event) {
+                    event.preventDefault();
+                }
+
+                // 如果已经跳转，不再重复触发
+                if (jumped) return;
+
+                // 清除倒计时
+                if (intervalId) {
+                    clearInterval(intervalId);
+                    intervalId = null;
+                }
+
+                // 直接跳转
+                performJump();
+            }
+
+            // 初始化：当 DOM 完全加载后开始倒计时，并绑定事件
+            document.addEventListener('DOMContentLoaded', function() {
+                // 确保倒计时从 3 开始
+                remainingSeconds = INIT_SECONDS;
+                if (countdownSpan) {
+                    countdownSpan.textContent = remainingSeconds;
+                }
+
+                // 启动倒计时
+                startCountdown();
+
+                // 为按钮绑定点击事件 (立即跳转)
+                if (jumpBtn) {
+                    jumpBtn.addEventListener('click', function(e) {
+                        e.preventDefault();   // 按钮本来没有默认行为，但保留一致性
+                        cancelAndJump(e);
+                    });
+                }
+
+                // 为手动链接绑定点击事件 (使用 replace 跳转，避免历史记录)
+                if (directLink) {
+                    directLink.addEventListener('click', function(e) {
+                        e.preventDefault();   // 阻止 <a> 的默认跳转
+                        cancelAndJump(e);
+                    });
+                }
+
+                // 附加安全措施：如果用户通过其他方式离开页面，可清理定时器 (可选)
+                window.addEventListener('beforeunload', function() {
+                    if (intervalId) {
+                        clearInterval(intervalId);
+                        intervalId = null;
+                    }
+                });
+            });
+
+            // 极端情况：如果 DOMContentLoaded 已经错过？但 script 在 body 底部，没问题。
+            // 同时兼容非常老的浏览器：保留手动备选
+        })();
+    </script>
+
+    <!-- 非常后备：如果上面所有 JS 失效且 meta 也失效，用户可见手动链接 -->
+</body>
+</html>
